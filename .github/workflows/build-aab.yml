@@ -3,7 +3,7 @@ name: Build Android App Bundle (AAB)
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # దీనివల్ల బటన్ నొక్కి కూడా బిల్డ్ చేసుకోవచ్చు
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,17 +19,31 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+      - name: Setup Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
+      - name: Prepare environment
+        run: |
+          touch .env
+
+      - name: Generate Release Signing Key
+        run: |
+          keytool -genkey -v -keystore my-upload-key.jks \
+            -alias upload -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass android -keypass android \
+            -dname "CN=Panchangam, OU=App, O=Dev, L=Hyderabad, S=Telangana, C=IN"
 
       - name: Build Android App Bundle (.aab)
-        run: ./gradlew :app:bundleRelease --stacktrace
+        env:
+          KEYSTORE_PATH: my-upload-key.jks
+          STORE_PASSWORD: android
+          KEY_PASSWORD: android
+        run: gradle :app:bundleRelease --no-daemon --stacktrace
 
       - name: Upload AAB Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-bundle
+          name: playstore-release-aab
           path: app/build/outputs/bundle/release/*.aab
