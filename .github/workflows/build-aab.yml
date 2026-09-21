@@ -27,6 +27,7 @@ jobs:
       - name: Prepare environment
         run: |
           touch .env
+          touch .env.example
 
       - name: Generate Release Signing Key
         run: |
@@ -34,12 +35,14 @@ jobs:
             -alias upload -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass android -keypass android \
             -dname "CN=Panchangam, OU=App, O=Dev, L=Hyderabad, S=Telangana, C=IN"
+          cp my-upload-key.jks app/my-upload-key.jks
 
       - name: Build Android App Bundle (.aab)
         env:
           KEYSTORE_PATH: my-upload-key.jks
           STORE_PASSWORD: android
           KEY_PASSWORD: android
+          GRADLE_OPTS: "-Xmx4g -Dorg.gradle.daemon=false"
         run: gradle :app:bundleRelease --no-daemon --no-configuration-cache --stacktrace
 
       - name: Upload AAB Artifact
