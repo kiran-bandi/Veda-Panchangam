@@ -1,0 +1,7 @@
+{
+  "name": "Veda Panchangam",
+  "description": "Location-aware Indian Calendar, Panchangam, Muhurtha, Festivals, Astronomy, and Devotional platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
