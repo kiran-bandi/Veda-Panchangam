@@ -1,4 +1,4 @@
-# Privacy Policy for Veda Panchangam
+# Privacy Policy for Veda Panchangam (శ్రీ వేద తెలుగు పంచాంగం)
 
 **Effective Date:** September 21, 2026
 
@@ -48,12 +48,7 @@ You have full control over the permissions granted to Veda Panchangam:
 
 ---
 
-## 6. Updates to This Privacy Policy
-We may update our Privacy Policy periodically. Any changes will be reflected in this document with a revised "Effective Date".
-
----
-
-## 7. Contact Us
+## 6. Contact Us
 If you have any questions, feedback, or concerns regarding this Privacy Policy, please contact us at:
-- **App Name:** Veda Panchangam
-- **Support Email:** kiran.bandi1995@gmail.com
+- **App Name:** Veda Panchangam (శ్రీ వేద తెలుగు పంచాంగం)
+- **Support Email:** kiran.bandi247@gmail.com
